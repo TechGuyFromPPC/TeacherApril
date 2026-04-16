@@ -3,111 +3,238 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Dashboard | Salas ng Karunungan</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <title>Salas ng Karunungan | Filipino Lesson Plans & Thesis Consulting</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
     <style>
-        :root { --ph-blue: #0038a8; --ph-red: #ce1126; --ph-gold: #fcd116; }
-        body { font-family: 'Poppins', sans-serif; background: #f0f2f5; margin: 0; padding: 10px; }
-        .admin-container { max-width: 1100px; margin: 0 auto; background: white; padding: 20px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
-        
-        .header-flex { display: flex; justify-content: space-between; align-items: center; border-bottom: 3px solid var(--ph-blue); padding-bottom: 15px; margin-bottom: 25px; flex-wrap: wrap; gap: 10px; }
-        h1 { margin: 0; color: var(--ph-blue); font-size: 1.5rem; }
-
-        /* Stats Card */
-        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 15px; margin-bottom: 30px; }
-        .stat-card { background: white; padding: 15px; border-radius: 10px; border-top: 5px solid var(--ph-gold); box-shadow: 0 4px 10px rgba(0,0,0,0.05); text-align: center; }
-        .stat-card h3 { margin: 0; font-size: 0.75rem; color: #666; text-transform: uppercase; }
-        .stat-card p { margin: 5px 0 0; font-size: 1.4rem; font-weight: 700; color: var(--ph-blue); }
-
-        /* Filters */
-        .filter-section { background: #f8f9fa; padding: 15px; border-radius: 10px; margin-bottom: 20px; display: flex; gap: 10px; align-items: flex-end; flex-wrap: wrap; }
-        .filter-group { display: flex; flex-direction: column; gap: 5px; flex: 1; min-width: 140px; }
-        .filter-group label { font-size: 0.75rem; font-weight: 600; }
-        input[type="date"] { padding: 8px; border: 1px solid #ddd; border-radius: 5px; font-family: inherit; width: 100%; }
-        .btn-reset { background: #6c757d; color: white; border: none; padding: 10px; border-radius: 5px; cursor: pointer; flex: 1; min-width: 140px; }
-
-        /* Mobile Friendly Table */
-        table { width: 100%; border-collapse: collapse; }
-        thead { display: table-header-group; }
-        th { background: var(--ph-blue); color: white; padding: 12px; text-align: left; font-size: 0.85rem; }
-        td { padding: 12px; border-bottom: 1px solid #eee; font-size: 0.9rem; }
-        
-        .receipt-preview { width: 50px; height: 50px; object-fit: cover; cursor: pointer; border-radius: 4px; }
-        .status-badge { padding: 4px 8px; border-radius: 12px; font-size: 0.7rem; font-weight: 700; }
-        .pending { background: #fff3cd; color: #856404; }
-        .approved { background: #d4edda; color: #155724; }
-        
-        .btn-action { padding: 8px 12px; border: none; border-radius: 4px; cursor: pointer; font-weight: 600; font-size: 0.8rem; width: 100%; margin-bottom: 5px; }
-        .btn-approve { background: #28a745; color: white; }
-        .btn-reject { background: #dc3545; color: white; }
-
-        /* Tablet & Mobile Table Breakpoint */
-        @media screen and (max-width: 768px) {
-            thead { display: none; } /* Itago ang header sa mobile */
-            tr { display: block; margin-bottom: 20px; border: 1px solid #ddd; border-radius: 10px; padding: 10px; background: #fff; }
-            td { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #f0f0f0; padding: 8px 0; text-align: right; }
-            td::before { content: attr(data-label); font-weight: 700; color: var(--ph-blue); text-align: left; font-size: 0.8rem; }
-            td:last-child { border-bottom: none; flex-direction: column; gap: 5px; }
-            .receipt-preview { width: 100px; height: 60px; }
+        :root {
+            --ph-blue: #0038a8;
+            --ph-red: #ce1126;
+            --ph-gold: #fcd116;
+            --dark-oak: #3e2723;
+            --cream: #fdfaf5;
+            --shadow: 0 8px 25px rgba(0,0,0,0.1);
+            --font-main: 'Poppins', sans-serif;
+            --font-elegant: 'Playfair Display', serif;
         }
 
-        #imgModal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); padding: 20px; box-sizing: border-box; }
-        #fullImg { max-width: 100%; max-height: 90%; object-fit: contain; margin-top: 20px; }
+        html { scroll-behavior: smooth; box-sizing: border-box; }
+        *, *:before, *:after { box-sizing: inherit; }
+        body { font-family: var(--font-main); background: var(--cream); margin: 0; color: var(--dark-oak); line-height: 1.6; }
+        h1, h2, h3 { font-family: var(--font-elegant); }
+        .container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
+
+        /* Navigation */
+        header { background: white; padding: 20px 0; position: sticky; top: 0; z-index: 1000; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
+        .nav-wrapper { display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-size: 1.4rem; font-weight: 700; color: var(--ph-blue); letter-spacing: 1px; }
+        nav ul { list-style: none; margin: 0; padding: 0; display: flex; gap: 30px; }
+        nav a { text-decoration: none; color: var(--dark-oak); font-weight: 600; font-size: 0.9rem; transition: 0.3s; }
+        nav a:hover { color: var(--ph-red); }
+
+        /* Hero */
+        .hero { 
+            background: linear-gradient(rgba(0, 56, 168, 0.9), rgba(0, 56, 168, 0.8)), url('https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&q=80');
+            background-size: cover; background-position: center; color: white; padding: 120px 0; text-align: center; 
+        }
+        .hero h1 { font-size: 3.5rem; margin: 0 0 20px; }
+        .hero p { font-size: 1.2rem; opacity: 0.9; max-width: 600px; margin: 0 auto 30px; }
+        .btn-main { background: var(--ph-gold); color: var(--dark-oak); padding: 15px 40px; border-radius: 50px; font-weight: 700; text-decoration: none; display: inline-block; transition: 0.3s; }
+        .btn-main:hover { background: white; transform: scale(1.05); }
+
+        /* About Section */
+        .about { padding: 100px 0; }
+        .about-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: 60px; align-items: center; }
+        .about-img img { width: 100%; border: 10px solid white; box-shadow: var(--shadow); border-radius: 4px; display: block; }
+        .about-text h2 { color: var(--ph-blue); font-size: 2.5rem; margin-top: 0; margin-bottom: 10px; }
+        .about-text .title { color: var(--ph-red); font-weight: 700; display: block; margin-bottom: 5px; text-transform: uppercase; letter-spacing: 2px; }
+        .school-tag { display: inline-block; background: #eee; padding: 5px 12px; border-radius: 4px; font-size: 0.85rem; font-weight: 600; margin-bottom: 20px; color: var(--dark-oak); }
+
+        /* Shop Section */
+        .shop { background: #f0f2f5; padding: 100px 0; }
+        .section-title { text-align: center; font-size: 2.8rem; color: var(--ph-blue); margin-bottom: 50px; }
+        .product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 30px; }
+        .card { background: white; padding: 30px; box-shadow: var(--shadow); border-left: 5px solid var(--ph-blue); transition: 0.3s; }
+        .card:hover { border-left-color: var(--ph-gold); transform: translateY(-5px); }
+        .card h3 { margin: 0 0 15px; font-size: 1.6rem; }
+        .price-row { display: flex; justify-content: space-between; align-items: center; border-top: 1px solid #eee; padding-top: 20px; }
+        .price { font-size: 1.5rem; font-weight: 700; color: var(--ph-blue); }
+        .btn-buy { background: var(--ph-blue); color: white; padding: 10px 20px; border: none; font-weight: 600; cursor: pointer; transition: 0.3s; }
+
+        /* Thesis CTA */
+        .thesis { background: var(--dark-oak); color: white; padding: 80px 0; text-align: center; }
+        .btn-outline { border: 2px solid var(--ph-gold); color: var(--ph-gold); padding: 12px 30px; text-decoration: none; font-weight: 700; transition: 0.3s; display: inline-block; margin-top: 20px; }
+
+        /* Modals */
+        .modal { 
+            display: none; position: fixed; z-index: 2000; left: 0; top: 0; 
+            width: 100%; height: 100%; background: rgba(0,0,0,0.85); 
+            backdrop-filter: blur(5px); overflow-y: auto; 
+        }
+        .modal-content { 
+            background: white; margin: 40px auto; padding: 40px 30px; 
+            width: 90%; max-width: 450px; border-radius: 12px; position: relative;
+            display: flex; flex-direction: column; align-items: center; text-align: center;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.3); margin-bottom: 60px;
+        }
+        .close { position: absolute; right: 20px; top: 15px; font-size: 28px; cursor: pointer; color: #aaa; }
+
+        .qr-box { 
+            background: #fdfaf5; padding: 25px; border-radius: 8px; border: 1px solid #eee;
+            margin: 15px 0 25px; width: 100%; max-width: 380px; 
+        }
+        .qr-box img { 
+            max-width: 180px; width: 100%; height: auto; 
+            display: block; margin: 10px auto; border: 1px solid #ddd; padding: 5px; background: white;
+        }
+
+        #paymentForm { width: 100%; }
+        #paymentForm label { font-weight: 600; margin-bottom: 8px; display: block; }
+        #paymentForm input { 
+            width: 100%; padding: 14px; margin-bottom: 15px; border: 1.5px solid #eee; 
+            border-radius: 6px; text-align: center; font-family: var(--font-main);
+        }
+        .btn-submit { 
+            background: var(--ph-red); color: white; width: 100%; border: none; 
+            padding: 18px; font-weight: 700; border-radius: 6px; cursor: pointer;
+            text-transform: uppercase; letter-spacing: 1px; transition: 0.3s;
+        }
+
+        footer { background: #1a1a1a; color: #888; padding: 40px 0; text-align: center; font-size: 0.85rem; }
+
+        @media (max-width: 768px) {
+            .about-grid { grid-template-columns: 1fr; text-align: center; }
+            .hero h1 { font-size: 2.5rem; }
+        }
     </style>
 </head>
 <body>
 
-<div class="admin-container">
-    <div class="header-flex">
-        <h1>Dashboard ni Ma'am April</h1>
-        <div id="currentDate" style="font-size: 0.8rem; color: #666;"></div>
+    <header>
+        <div class="container nav-wrapper">
+            <div class="logo">Salas ng Karunungan</div>
+            <nav>
+                <ul>
+                    <li><a href="#tungkol">Tungkol</a></li>
+                    <li><a href="#shop">Materyales</a></li>
+                    <li><a href="#thesis">Tesis</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <h1>Dakilang Karunungan para sa Pilipinong Guro</h1>
+            <p>De-kalidad na mga kagamitang pampagtuturo mula kay Ma'am April Gonzales.</p>
+            <a href="#shop" class="btn-main">Tingnan ang mga Materyales</a>
+        </div>
+    </section>
+
+    <section id="tungkol" class="about">
+        <div class="container about-grid">
+            <div class="about-img">
+                <img src="april1.jpg" alt="Ma'am April Gonzales">
+            </div>
+            <div class="about-text">
+                <span class="title">Guro at Dalubhasa</span>
+                <h2>Mabuhay! Ako si Ma'am April Gonzales</h2>
+                <div class="school-tag">Bahile National School, Puerto Princesa</div>
+                <p>Isang gurong may masidhing pagmamahal sa ating sariling wika. Ako ay nagtapos bilang <strong>Magna Cum Laude</strong> sa <strong>Palawan State University (Class of 2018)</strong>.</p>
+                <p>Ang aking motibasyon sa pagbuo ng proyektong ito ay ang aking silakbo na makapagturo at makatulong sa aking mga kapwa guro. Layunin ko na mapagaan ang inyong paghahanda sa pamamagitan ng mga komprehensibong banghay-aralin at gabay sa pananaliksik.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="shop" class="shop">
+        <div class="container">
+            <h2 class="section-title">Mga Banghay-Aralin</h2>
+            <div class="product-grid">
+                <div class="card">
+                    <h3>Ibong Adarna</h3>
+                    <p>Kumpletong gabay para sa Grade 7. Kasama ang mga talasalitaan at pagsusulit.</p>
+                    <div class="price-row">
+                        <span class="price">₱150</span>
+                        <button class="btn-buy" onclick="openCheckout('Ibong Adarna Guide', 150)">Bilhin</button>
+                    </div>
+                </div>
+                <div class="card">
+                    <h3>Florante at Laura</h3>
+                    <p>Malalim na pagsusuri ng bawat saknong para sa Grade 8. May creative activities.</p>
+                    <div class="price-row">
+                        <span class="price">₱200</span>
+                        <button class="btn-buy" onclick="openCheckout('Florante at Laura Guide', 200)">Bilhin</button>
+                    </div>
+                </div>
+                <div class="card">
+                    <h3>Wika at Gramatika</h3>
+                    <p>Pokus sa wastong gamit ng mga salita at balarila para sa Senior High School.</p>
+                    <div class="price-row">
+                        <span class="price">₱120</span>
+                        <button class="btn-buy" onclick="openCheckout('Gramatika Module', 120)">Bilhin</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="thesis" class="thesis">
+        <div class="container">
+            <h2>Nahihirapan sa iyong Tesis?</h2>
+            <p>Huwag mag-alala, handa kitang gabayan sa iyong pananaliksik sa Filipino.</p>
+            <a href="mailto:guro@email.com" class="btn-outline">LIBRENG KONSULTASYON</a>
+        </div>
+    </section>
+
+    <div id="checkoutModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2 style="color: var(--ph-blue); margin: 0 0 10px;">Pagbabayad</h2>
+            <p id="modalTitle" style="font-weight:700; margin: 0;"></p>
+            <p id="modalPrice" style="color: var(--ph-red); font-weight:700; margin: 5px 0 0;"></p>
+
+            <div class="qr-box">
+                <p style="margin-top:0; font-size: 0.9rem;">I-scan ang GCash QR para magbayad</p>
+                <img src="qr1.png" alt="GCash QR">
+                <p style="font-size: 0.85rem; margin-top:10px; font-weight: bold;">Account Name: APRIL GONZALES</p>
+            </div>
+
+            <form id="paymentForm">
+                <input type="hidden" id="hiddenProduct">
+                <label>Iyong Email Address</label>
+                <input type="email" id="userEmail" placeholder="Saan ipapadala ang file?" required>
+                <label>Upload Screenshot ng Resibo</label>
+                <input type="file" id="proofFile" accept="image/*" required>
+                <button type="submit" class="btn-submit" id="submitBtn">Isumite ang Order</button>
+            </form>
+        </div>
     </div>
 
-    <div class="stats-grid">
-        <div class="stat-card">
-            <h3>Benta</h3>
-            <p id="totalSales">₱0</p>
-        </div>
-        <div class="stat-card">
-            <h3>Approved</h3>
-            <p id="approvedCount">0</p>
-        </div>
-        <div class="stat-card" style="border-top-color: var(--ph-red);">
-            <h3>Pending</h3>
-            <p id="pendingCount">0</p>
+    <div id="successModal" class="modal">
+        <div class="modal-content" style="padding: 50px 30px;">
+            <div style="background: #d4edda; color: #155724; width: 70px; height: 70px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 40px; margin-bottom: 20px;">✓</div>
+            <h2 style="color: #155724; margin-top: 0;">Tagumpay!</h2>
+            <p style="font-size: 1.1rem; color: #155724;">Matagumpay na naipadala ang iyong order.</p>
+            <p style="color: #555; font-size: 0.9rem;">Suriin ang iyong email para sa aming update mula kay Ma'am April. Ipadadala namin ang file sa email na iyong ibinigay matapos ang verification.</p>
+            <button onclick="closeSuccessModal()" class="btn-submit" style="background: var(--ph-blue); margin-top: 20px;">Salamat at OK</button>
         </div>
     </div>
 
-    <div class="filter-section">
-        <div class="filter-group"><label>Mula:</label><input type="date" id="startDate"></div>
-        <div class="filter-group"><label>Hanggang:</label><input type="date" id="endDate"></div>
-        <button class="btn-reset" onclick="resetFilters()">Reset</button>
-    </div>
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Salas ng Karunungan | Ma'am April Gonzales</p>
+            <p style="font-size: 0.7rem; opacity: 0.6;">Bahile National School | PSU Magna Cum Laude 2018</p>
+        </div>
+    </footer>
 
-    <table>
-        <thead>
-            <tr>
-                <th>Petsa</th>
-                <th>Email</th>
-                <th>Item</th>
-                <th>Halaga</th>
-                <th>Resibo</th>
-                <th>Status</th>
-                <th>Aksyon</th>
-            </tr>
-        </thead>
-        <tbody id="ordersBody"></tbody>
-    </table>
-</div>
-
-<div id="imgModal" onclick="this.style.display='none'">
-    <img id="fullImg" src="">
-</div>
-
-<script type="module">
+   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-    import { getFirestore, collection, onSnapshot, doc, updateDoc, query, orderBy } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+    import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
+    // Iyong Actual Config
     const firebaseConfig = {
         apiKey: "AIzaSyDFAYSZFOqIcpt5fsLG7HZrA7PXTAdiUEE",
         authDomain: "teacher-2a27f.firebaseapp.com",
@@ -117,73 +244,92 @@
     const app = initializeApp(firebaseConfig);
     const db = getFirestore(app);
 
-    const priceList = { "Ibong Adarna Guide": 150, "Florante at Laura Guide": 200, "Gramatika Module": 120 };
-    let allOrders = [];
+    // Gawing "Global" ang functions para mabasa ng HTML buttons
+    window.openCheckout = function(name, price) {
+        document.getElementById('modalTitle').innerText = name;
+        document.getElementById('modalPrice').innerText = "Halaga: ₱" + price;
+        document.getElementById('hiddenProduct').value = name;
+        document.getElementById('checkoutModal').style.display = 'block';
+        document.body.style.overflow = 'hidden';
+    };
 
-    onSnapshot(query(collection(db, "orders"), orderBy("timestamp", "desc")), (snapshot) => {
-        allOrders = [];
-        snapshot.forEach(doc => allOrders.push({ id: doc.id, ...doc.data() }));
-        renderTable(allOrders);
+    window.closeModal = function() {
+        document.getElementById('checkoutModal').style.display = 'none';
+        document.body.style.overflow = 'auto';
+    };
+
+    window.showSuccessModal = function() {
+        document.getElementById('successModal').style.display = 'block';
+        document.body.style.overflow = 'hidden';
+    };
+
+    window.closeSuccessModal = function() {
+        document.getElementById('successModal').style.display = 'none';
+        document.body.style.overflow = 'auto';
+    };
+
+    // Helper para sa Image to Text
+    const toBase64 = file => new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = () => resolve(reader.result);
+        reader.onerror = error => reject(error);
     });
 
-    function renderTable(orders) {
-        const body = document.getElementById('ordersBody');
-        const start = document.getElementById('startDate').value;
-        const end = document.getElementById('endDate').value;
-        body.innerHTML = "";
-        let total = 0, approved = 0, pending = 0;
+    // Form Logic
+    const form = document.getElementById('paymentForm');
+    const submitBtn = document.getElementById('submitBtn');
 
-        orders.forEach(order => {
-            const date = order.timestamp ? new Date(order.timestamp.seconds * 1000) : new Date();
-            const dateStr = date.toISOString().split('T')[0];
-            const price = priceList[order.productName] || 0;
+    form.onsubmit = async function(e) {
+        e.preventDefault();
+        submitBtn.innerText = "Nagsusumite...";
+        submitBtn.disabled = true;
 
-            if (start && dateStr < start) return;
-            if (end && dateStr > end) return;
+        const email = document.getElementById('userEmail').value;
+        const product = document.getElementById('hiddenProduct').value;
+        const file = document.getElementById('proofFile').files[0];
 
-            if (order.status === 'approved') { total += price; approved++; }
-            else if (order.status === 'pending') { pending++; }
+        try {
+            let imageString = "";
+            if (file) {
+                // Check if file size is too big for Firestore (limit is roughly 1MB per doc)
+                if (file.size > 800000) { 
+                    alert("Masyadong malaki ang file. Mangyaring i-screenshot ito o i-compress (dapat ay less than 1MB).");
+                    throw new Error("File too large");
+                }
+                imageString = await toBase64(file);
+            }
 
-            body.innerHTML += `
-                <tr>
-                    <td data-label="Petsa">${date.toLocaleDateString()}</td>
-                    <td data-label="Email">${order.customerEmail}</td>
-                    <td data-label="Item">${order.productName}</td>
-                    <td data-label="Halaga">₱${price}</td>
-                    <td data-label="Resibo"><img src="${order.receiptImage}" class="receipt-preview" onclick="viewImage('${order.receiptImage}')"></td>
-                    <td data-label="Status"><span class="status-badge ${order.status}">${order.status}</span></td>
-                    <td data-label="Aksyon">
-                        ${order.status === 'pending' ? `
-                            <button class="btn-action btn-approve" onclick="updateStatus('${order.id}', 'approved')">Approve</button>
-                            <button class="btn-action btn-reject" onclick="updateStatus('${order.id}', 'rejected')">Reject</button>
-                        ` : 'Tapos na'}
-                    </td>
-                </tr>`;
-        });
-        document.getElementById('totalSales').innerText = "₱" + total.toLocaleString();
-        document.getElementById('approvedCount').innerText = approved;
-        document.getElementById('pendingCount').innerText = pending;
+            await addDoc(collection(db, "orders"), {
+                customerEmail: email,
+                productName: product,
+                receiptImage: imageString,
+                status: "pending",
+                timestamp: serverTimestamp()
+            });
+
+            window.closeModal();
+            form.reset();
+            window.showSuccessModal();
+
+        } catch (error) {
+            console.error(error);
+            if(error.message !== "File too large") {
+                alert("Error: " + error.message);
+            }
+        } finally {
+            submitBtn.innerText = "Isumite ang Order";
+            submitBtn.disabled = false;
+        }
+    };
+
+    // Window click listener para isara ang modal kung mag-click sa labas
+    window.onclick = function(event) {
+        const checkout = document.getElementById('checkoutModal');
+        const success = document.getElementById('successModal');
+        if (event.target == checkout) window.closeModal();
+        if (event.target == success) window.closeSuccessModal();
     }
-
-    window.updateStatus = async (id, status) => {
-        if (!confirm("Sigurado ka?")) return;
-        await updateDoc(doc(db, "orders", id), { status: status });
-    };
-
-    window.viewImage = (src) => {
-        document.getElementById('fullImg').src = src;
-        document.getElementById('imgModal').style.display = 'block';
-    };
-
-    window.resetFilters = () => {
-        document.getElementById('startDate').value = "";
-        document.getElementById('endDate').value = "";
-        renderTable(allOrders);
-    };
-
-    document.getElementById('startDate').addEventListener('change', () => renderTable(allOrders));
-    document.getElementById('endDate').addEventListener('change', () => renderTable(allOrders));
-    document.getElementById('currentDate').innerText = new Date().toLocaleDateString();
 </script>
 </body>
 </html>
