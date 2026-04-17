@@ -66,6 +66,29 @@
         #cartList { margin: 20px 0; border-top: 1px solid #eee; }
         .cart-item { display: flex; justify-content: space-between; align-items: center; padding: 12px 0; border-bottom: 1px solid #eee; font-size: 0.9rem; }
         
+        /* I-update ang media query sa index.html */
+@media (max-width: 768px) {
+    .nav-flex { 
+        padding: 0 15px; 
+    }
+    
+    .hero h1 { font-size: 2.2rem; }
+    
+    .grid { 
+        grid-template-columns: 1fr; /* Isang column lang para sa lesson plans */
+        gap: 20px;
+    }
+
+    /* Siguraduhin na ang checkout modal ay readable */
+    #checkoutModal div {
+        width: 95% !important;
+        padding: 20px !important;
+    }
+
+    input, button {
+        font-size: 16px !important; /* Pinipigilan ang auto-zoom sa iPhone */
+    }
+}
         footer { background: #1a1a1a; color: #888; padding: 40px 0; text-align: center; font-size: 0.85rem; }
     </style>
 </head>
