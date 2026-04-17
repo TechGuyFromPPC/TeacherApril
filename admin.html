@@ -41,6 +41,43 @@
         #imgModal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); text-align: center; }
         #fullImg { max-width: 90%; max-height: 85%; margin-top: 30px; border: 5px solid white; }
         .product-list-cell { max-width: 250px; font-size: 0.85rem; color: #444; }
+
+        /* Idagdag ito sa <style> ng admin.html */
+@media (max-width: 768px) {
+    .admin-container { padding: 15px; }
+    
+    .header-flex { 
+        flex-direction: column; 
+        text-align: center; 
+        gap: 10px; 
+    }
+
+    .stats-grid { 
+        grid-template-columns: 1fr; /* Isang column lang ang stats cards */
+    }
+
+    .filter-section {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    /* Gawing scrollable ang table nang hindi nasisira ang layout */
+    table {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap; /* Pinipigilan ang pag-wrap ng text sa cells */
+    }
+    
+    th, td {
+        padding: 10px;
+        font-size: 0.8rem;
+    }
+
+    .receipt-preview {
+        width: 45px;
+        height: 45px;
+    }
+}
     </style>
 </head>
 <body>
