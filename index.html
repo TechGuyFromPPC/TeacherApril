@@ -9,88 +9,191 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 
-    <style>
-        :root {
-            --ph-blue: #0038a8;
-            --ph-red: #ce1126;
-            --ph-gold: #fcd116;
-            --dark-oak: #3e2723;
-            --cream: #fdfaf5;
-            --shadow: 0 8px 25px rgba(0,0,0,0.1);
-            --font-main: 'Poppins', sans-serif;
-            --font-elegant: 'Playfair Display', serif;
-        }
+<style>
+    :root {
+        --ph-blue: #0038a8;
+        --ph-red: #ce1126;
+        --ph-gold: #fcd116;
+        --dark-oak: #3e2723;
+        --cream: #fdfaf5;
+        --shadow: 0 8px 25px rgba(0,0,0,0.1);
+        --font-main: 'Poppins', sans-serif;
+        --font-elegant: 'Playfair Display', serif;
+    }
 
-        html { scroll-behavior: smooth; box-sizing: border-box; }
-        *, *:before, *:after { box-sizing: inherit; }
-        body { font-family: var(--font-main); background: var(--cream); margin: 0; color: var(--dark-oak); line-height: 1.6; }
-        h1, h2, h3 { font-family: var(--font-elegant); }
-        .container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
+    html { scroll-behavior: smooth; box-sizing: border-box; }
+    *, *:before, *:after { box-sizing: inherit; }
+    
+    body { 
+        font-family: var(--font-main); 
+        background: var(--cream); 
+        margin: 0; 
+        color: var(--dark-oak); 
+        line-height: 1.6; 
+    }
 
-        /* Navigation */
-        header { background: white; padding: 20px 0; position: sticky; top: 0; z-index: 1000; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
-        .nav-wrapper { display: flex; justify-content: space-between; align-items: center; }
-        .logo { font-size: 1.4rem; font-weight: 700; color: var(--ph-blue); letter-spacing: 1px; }
-        nav ul { list-style: none; margin: 0; padding: 0; display: flex; gap: 30px; align-items: center; }
-        nav a { text-decoration: none; color: var(--dark-oak); font-weight: 600; font-size: 0.9rem; transition: 0.3s; }
-        nav a:hover { color: var(--ph-red); }
+    h1, h2, h3 { font-family: var(--font-elegant); }
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
 
-        .cart-icon { position: relative; cursor: pointer; font-size: 1.2rem; }
-        #cartCount { position: absolute; top: -10px; right: -10px; background: var(--ph-red); color: white; font-size: 0.7rem; padding: 2px 6px; border-radius: 50%; font-weight: 700; }
+    /* Navigation */
+    header { 
+        background: white; 
+        padding: 15px 0; 
+        position: sticky; 
+        top: 0; 
+        z-index: 1000; 
+        box-shadow: 0 2px 10px rgba(0,0,0,0.05); 
+    }
+    .nav-wrapper { display: flex; justify-content: space-between; align-items: center; }
+    .logo { font-size: 1.4rem; font-weight: 700; color: var(--ph-blue); letter-spacing: 1px; text-decoration: none; }
+    
+    nav ul { list-style: none; margin: 0; padding: 0; display: flex; gap: 30px; align-items: center; }
+    nav a { text-decoration: none; color: var(--dark-oak); font-weight: 600; font-size: 0.9rem; transition: 0.3s; }
+    nav a:hover { color: var(--ph-red); }
 
-                /* About Section */
-        .about { padding: 100px 0; }
-        .about-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: 60px; align-items: center; }
-        .about-img img { width: 100%; border: 10px solid white; box-shadow: var(--shadow); border-radius: 4px; display: block; }
-        .about-text h2 { color: var(--ph-blue); font-size: 2.5rem; margin-top: 0; margin-bottom: 10px; }
-        .about-text .title { color: var(--ph-red); font-weight: 700; display: block; margin-bottom: 5px; text-transform: uppercase; letter-spacing: 2px; }
-        .school-tag { display: inline-block; background: #eee; padding: 5px 12px; border-radius: 4px; font-size: 0.85rem; font-weight: 600; margin-bottom: 20px; color: var(--dark-oak); }
-        /* Hero & Sections */
-        .hero { background: linear-gradient(rgba(0, 56, 168, 0.9), rgba(0, 56, 168, 0.8)), url('https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&q=80'); background-size: cover; background-position: center; color: white; padding: 120px 0; text-align: center; }
-        .hero h1 { font-size: 3.5rem; margin: 0 0 20px; }
-        .btn-main { background: var(--ph-gold); color: var(--dark-oak); padding: 15px 40px; border-radius: 50px; font-weight: 700; text-decoration: none; display: inline-block; transition: 0.3s; }
+    .cart-icon { position: relative; cursor: pointer; font-size: 1.2rem; }
+    #cartCount { 
+        position: absolute; 
+        top: -10px; 
+        right: -10px; 
+        background: var(--ph-red); 
+        color: white; 
+        font-size: 0.7rem; 
+        padding: 2px 6px; 
+        border-radius: 50%; 
+        font-weight: 700; 
+    }
 
-        /* Shop Section */
-        .shop { background: #f0f2f5; padding: 100px 0; }
-        .section-title { text-align: center; font-size: 2.8rem; color: var(--ph-blue); margin-bottom: 50px; }
-        .product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 30px; }
-        .card { background: white; padding: 30px; box-shadow: var(--shadow); border-left: 5px solid var(--ph-blue); transition: 0.3s; }
-        .price-row { display: flex; justify-content: space-between; align-items: center; border-top: 1px solid #eee; padding-top: 20px; margin-top: 15px; }
-        .price { font-size: 1.5rem; font-weight: 700; color: var(--ph-blue); }
-        .btn-buy { background: var(--ph-blue); color: white; padding: 10px 20px; border: none; font-weight: 600; cursor: pointer; transition: 0.3s; border-radius: 4px; }
-        .btn-buy:hover { background: var(--ph-red); }
+    /* Hero Section */
+    .hero { 
+        background: linear-gradient(rgba(0, 56, 168, 0.85), rgba(0, 56, 168, 0.75)), 
+                    url('https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&q=80'); 
+        background-size: cover; 
+        background-position: center; 
+        color: white; 
+        padding: 120px 0; 
+        text-align: center; 
+    }
+    .hero h1 { font-size: 3.5rem; margin: 0 0 20px; line-height: 1.2; }
+    .btn-main { 
+        background: var(--ph-gold); 
+        color: var(--dark-oak); 
+        padding: 15px 40px; 
+        border-radius: 50px; 
+        font-weight: 700; 
+        text-decoration: none; 
+        display: inline-block; 
+        transition: 0.3s; 
+        border: none;
+        cursor: pointer;
+    }
+    .btn-main:hover { transform: translateY(-3px); box-shadow: var(--shadow); }
 
-        /* Shared Modal Styles */
-        .modal { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); backdrop-filter: blur(5px); overflow-y: auto; padding: 20px; }
-        .modal-content { background: white; margin: 20px auto; padding: 30px; width: 95%; max-width: 450px; border-radius: 12px; text-align: center; }
-        #cartList { margin: 20px 0; border-top: 1px solid #eee; }
-        .cart-item { display: flex; justify-content: space-between; align-items: center; padding: 12px 0; border-bottom: 1px solid #eee; font-size: 0.9rem; }
+    /* About Section */
+    .about { padding: 100px 0; }
+    .about-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: 60px; align-items: center; }
+    .about-img img { width: 100%; border: 10px solid white; box-shadow: var(--shadow); border-radius: 4px; display: block; }
+    .about-text h2 { color: var(--ph-blue); font-size: 2.5rem; margin-top: 0; margin-bottom: 10px; }
+    .about-text .title { color: var(--ph-red); font-weight: 700; display: block; margin-bottom: 5px; text-transform: uppercase; letter-spacing: 2px; }
+    .school-tag { display: inline-block; background: #eee; padding: 5px 12px; border-radius: 4px; font-size: 0.85rem; font-weight: 600; margin-bottom: 20px; color: var(--dark-oak); }
+
+    /* Shop/Product Section */
+    .shop { background: #f0f2f5; padding: 100px 0; }
+    .section-title { text-align: center; font-size: 2.8rem; color: var(--ph-blue); margin-bottom: 50px; }
+    .product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 30px; }
+    
+    .card { 
+        background: white; 
+        padding: 30px; 
+        box-shadow: var(--shadow); 
+        border-left: 5px solid var(--ph-blue); 
+        transition: 0.3s; 
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+    .card:hover { transform: translateY(-5px); }
+    .card h3 { margin-top: 0; color: var(--dark-oak); }
+    
+    .price-row { 
+        display: flex; 
+        justify-content: space-between; 
+        align-items: center; 
+        border-top: 1px solid #eee; 
+        padding-top: 20px; 
+        margin-top: 15px; 
+    }
+    .price { font-size: 1.5rem; font-weight: 700; color: var(--ph-blue); }
+    
+    .btn-buy { 
+        background: var(--ph-blue); 
+        color: white; 
+        padding: 10px 20px; 
+        border: none; 
+        font-weight: 600; 
+        cursor: pointer; 
+        transition: 0.3s; 
+        border-radius: 4px; 
+    }
+    .btn-buy:hover { background: var(--ph-red); }
+
+    /* Modal Styles */
+    .modal { 
+        display: none; 
+        position: fixed; 
+        z-index: 2000; 
+        left: 0; 
+        top: 0; 
+        width: 100%; 
+        height: 100%; 
+        background: rgba(0,0,0,0.85); 
+        backdrop-filter: blur(5px); 
+        overflow-y: auto; 
+        padding: 20px; 
+    }
+    .modal-content { 
+        background: white; 
+        margin: 20px auto; 
+        padding: 30px; 
+        width: 95%; 
+        max-width: 450px; 
+        border-radius: 12px; 
+        text-align: center; 
+        position: relative;
+    }
+    #cartList { margin: 20px 0; border-top: 1px solid #eee; }
+    .cart-item { display: flex; justify-content: space-between; align-items: center; padding: 12px 0; border-bottom: 1px solid #eee; font-size: 0.9rem; text-align: left; }
+
+    /* Footer */
+    footer { background: #1a1a1a; color: #888; padding: 40px 0; text-align: center; font-size: 0.85rem; }
+
+    /* --- MOBILE OPTIMIZATION (THE FIXES) --- */
+    @media (max-width: 768px) {
+        .nav-wrapper { flex-direction: column; gap: 15px; }
+        nav ul { gap: 15px; flex-wrap: wrap; justify-content: center; }
         
-        /* I-update ang media query sa index.html */
-@media (max-width: 768px) {
-    .nav-flex { 
-        padding: 0 15px; 
-    }
-    
-    .hero h1 { font-size: 2.2rem; }
-    
-    .grid { 
-        grid-template-columns: 1fr; /* Isang column lang para sa lesson plans */
-        gap: 20px;
+        .hero { padding: 80px 0; }
+        .hero h1 { font-size: 2.2rem; padding: 0 10px; }
+
+        .about { padding: 60px 0; }
+        .about-grid { grid-template-columns: 1fr; gap: 30px; text-align: center; }
+        .about-text h2 { font-size: 2rem; }
+
+        .shop { padding: 60px 0; }
+        .section-title { font-size: 2rem; }
+        .product-grid { grid-template-columns: 1fr; padding: 0 10px; }
+
+        .modal-content { width: 92%; padding: 20px; }
+        
+        /* Mobile Form UX */
+        input, button, select, textarea { font-size: 16px !important; }
     }
 
-    /* Siguraduhin na ang checkout modal ay readable */
-    #checkoutModal div {
-        width: 95% !important;
-        padding: 20px !important;
+    @media (max-width: 400px) {
+        .logo { font-size: 1.1rem; }
+        nav a { font-size: 0.8rem; }
     }
-
-    input, button {
-        font-size: 16px !important; /* Pinipigilan ang auto-zoom sa iPhone */
-    }
-}
-        footer { background: #1a1a1a; color: #888; padding: 40px 0; text-align: center; font-size: 0.85rem; }
-    </style>
+</style>
 </head>
 <body>
 
